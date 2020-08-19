@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" name="viewport">
+    <title>设备配网</title>
+    <link href="./2.css" rel="stylesheet" type="text/css">
+    <link href="../3.css" rel="stylesheet" type="text/css">
+    <link href="../loading.css" rel="stylesheet" type="text/css">
+    <link href="../input.css" rel="stylesheet" type="text/css">
+    <script src="../jquery-1.11.1.min.js"></script>
+    <script src="../jquery.color-2.2.0.min.js"></script>
+    <script type="text/javascript">
+        function delayer() {
+            var div1 = $(".loading");
+            div1.animate({
+                opacity: '0'
+            }, "slow");
+            setTimeout('delayer1()', 500);
+        }
+
+        function delayer1() {
+            window.location = "https://esp.reraser.cn/";
+        }
+        $(document).ready(function() {
+            $(".title").click(function() {
+                $(".panel").slideToggle("slow");
+            });
+            $(".themeswitch").click(function() {
+                var div = $(".mask");
+                var div1 = $(".loading");
+                div1.animate({
+                    opacity: '1'
+                }, "slow");
+                div.animate({
+                    height: '100%',
+                    width: '100%'
+                }, "fast");
+                div.animate({
+                    opacity: '1'
+                }, "500");
+                div.animate({
+                    backgroundColor: '#222'
+                }, "slow");
+                div1.animate({
+                    opacity: '0'
+                }, "slow");
+                setTimeout('delayer()', 1500);
+            });
+        });
+    </script>
+    <link rel="manifest" href="../manifest.json">
+    <script>
+        // 检测浏览器是否支持SW
+        if (navigator.serviceWorker != null) {
+            navigator.serviceWorker.register('../sw.js')
+                .then(function(registartion) {
+                    console.log('支持sw:', registartion.scope)
+                })
+        }
+    </script>
+</head>
+
+<body>
+    <div class="form">
+        <div class="themeswitch">主题切换</div><br>
+        <div class="title">设备配网</div>
+        <div class="panel">
+            <form method="post" action="http://192.168.1.1/form" target="_self">
+                <input type="radio" checked="true" name="method" value="init_config" hidden="true" class="hid">
+                <div class="group">
+                    <input type="text" required name="wifi_ssid">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>SSID</label></div>
+                <div class="group">
+                    <input type="password" required name="wifi_password">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>Password</label></div>
+                <div class="group">
+                    <input type="text" required name="weather_appid">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>AppID</label></div>
+                <div class="group">
+                    <input type="password" required name="weather_appsecert">
+                    <span class="highlight"></span>
+                    <span class="bar"></span>
+                    <label>AppSecert</label></div>
+                <button type="submit" class="submit">提交</button>
+            </form>
+            Don't have an AppID?<a href="https://tianqiapi.com/user/register" class="apilink">Click here!</a>
+        </div>
+    </div>
+    <div class="mask"></div>
+    <div id="load" class="loading">
+        <div>G</div>
+        <div>N</div>
+        <div>I</div>
+        <div>D</div>
+        <div>A</div>
+        <div>O</div>
+        <div>L</div>
+    </div>
+</body>
+
+</html>
